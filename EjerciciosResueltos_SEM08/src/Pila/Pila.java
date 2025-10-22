@@ -5,30 +5,40 @@
 package Pila;
 
 public class Pila<T> {
-    protected Nodo<T> L;
-    
-    public void push(T valor){
+
+    private Nodo<T> L;
+
+    public Pila() {
+        L = null;
+    }
+
+    public void push(T valor) {
         Nodo<T> nuevo = new Nodo<>(valor);
-        if(L==null)
-            L=nuevo;
-        else{
+        if (L == null) {
+            L = nuevo;
+        } else {
             nuevo.setSgte(L);
             L = nuevo;
         }
     }
-    public T pop(){
-        T eliminado  = L.getInfo();
+
+    public T pop() {
+        T eliminado = L.getInfo();
         L = L.getSgte();
         return eliminado;
     }
-    public T peek(){
+
+    public T peek() {
         return L.getInfo();
     }
-    public boolean isEmpty(){
-        return L==null;
+
+    public boolean isEmpty() {
+        return L == null;
     }
-    public void removeAll(){
-         while(L != null)
-             L = L.getSgte();
+
+    public void removeAll() {
+        while (L != null) {
+            L = L.getSgte();
+        }
     }
 }
