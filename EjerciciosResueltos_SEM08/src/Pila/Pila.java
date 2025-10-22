@@ -41,4 +41,13 @@ public class Pila<T> {
             L = L.getSgte();
         }
     }
+    public int contar(){
+        int contador=0;
+        Nodo<T> p = L;
+        while(L==null){
+            contador++;
+            L=L.getSgte();
+        }
+        return contador;
+    }
 }
