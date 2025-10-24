@@ -202,15 +202,15 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(txtMetodo.getText().isEmpty()){
+        if(txtMetodo.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese Nombre  del Metodo", "INFORMACION",1);
             return;
         }
-        if(txtParametros.getText().isEmpty()){
+        if(txtParametros.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese parametros del Metodo", "INFORMACION",1);
             return;
         }
-        if(txtDuracion.getText().isEmpty()){
+        if(txtDuracion.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese Duracion del Metodo", "INFORMACION",1);
             return;
         }

@@ -131,7 +131,7 @@ public class FrmEjercicio03 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadoActionPerformed
-        if(txaLenguaje.getText().isEmpty()){
+        if(txaLenguaje.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese el codigo XML", "INFORMMACION",1);
             return;
         }
