@@ -4,17 +4,25 @@
  */
 package Ejercicio02;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
  */
 public class FrmEjercicio02 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmEjercicio02
-     */
+    CallStack cs = new CallStack();
+    DefaultTableModel modelo1;
+    DefaultTableModel modelo2 = new DefaultTableModel();
     public FrmEjercicio02() {
         initComponents();
+        
+        String titulos[] = {"METODOS", "PARAMETROS", "TIEMPO ESTIMADO"};
+        modelo1 = new DefaultTableModel(null, titulos);
+        tblIngresoMetodos.setModel(modelo1);
+        tblSalidaMetodos.setModel(modelo2);
     }
 
     /**
@@ -35,7 +43,7 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblingresoMetodos = new javax.swing.JTable();
+        tblIngresoMetodos = new javax.swing.JTable();
         btnMostrarPila = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSalidaMetodos = new javax.swing.JTable();
@@ -122,7 +130,7 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
-        tblingresoMetodos.setModel(new javax.swing.table.DefaultTableModel(
+        tblIngresoMetodos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -133,9 +141,14 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblingresoMetodos);
+        jScrollPane1.setViewportView(tblIngresoMetodos);
 
         btnMostrarPila.setText("MOSTRAR PILA");
+        btnMostrarPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarPilaActionPerformed(evt);
+            }
+        });
 
         tblSalidaMetodos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,19 +202,49 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        if(txtMetodo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese Nombre  del Metodo", "INFORMACION",1);
+            return;
+        }
+        if(txtParametros.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese parametros del Metodo", "INFORMACION",1);
+            return;
+        }
+        if(txtDuracion.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese Duracion del Metodo", "INFORMACION",1);
+            return;
+        }
+        String metodo, parametros, tiempo;
+        metodo = txtMetodo.getText().trim();
+        parametros = txtParametros.getText().trim();
+        tiempo = txtDuracion.getText().trim();
+        CallFrame nuevo = new CallFrame(metodo, parametros, tiempo);
+        cs.call(nuevo);
+        
+        Object[] filaParaTabla = new Object[3];
+        filaParaTabla[0] = nuevo.getMetodo();
+        filaParaTabla[1] = nuevo.getParametros();
+        filaParaTabla[2] = nuevo.getTiempoEstimado();
+        modelo1.addRow(filaParaTabla);
+        this.limpiar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+    private void limpiar(){
         txtMetodo.setText("");
         txtParametros.setText("");
         txtDuracion.setText("");
         txtMetodo.requestFocus();
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
+    }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnMostrarPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarPilaActionPerformed
+        cs.printStack(modelo2);
+    }//GEN-LAST:event_btnMostrarPilaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,8 +260,8 @@ public class FrmEjercicio02 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblIngresoMetodos;
     private javax.swing.JTable tblSalidaMetodos;
-    private javax.swing.JTable tblingresoMetodos;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtMetodo;
     private javax.swing.JTextField txtParametros;

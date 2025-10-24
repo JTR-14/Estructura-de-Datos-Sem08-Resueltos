@@ -28,8 +28,8 @@ public class Pila<T> {
         return eliminado;
     }
 
-    public T peek() {
-        return L.getInfo();
+    public Nodo<T> peek() {
+        return L;
     }
 
     public boolean isEmpty() {
@@ -44,10 +44,11 @@ public class Pila<T> {
     public int contar(){
         int contador=0;
         Nodo<T> p = L;
-        while(L==null){
+        while(p!=null){
             contador++;
-            L=L.getSgte();
+            p=p.getSgte();
         }
         return contador;
     }
+ 
 }
