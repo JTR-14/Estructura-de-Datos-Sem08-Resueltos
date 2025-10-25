@@ -27,8 +27,10 @@ public class Pila<T> {
         L = L.getSgte();
         return eliminado;
     }
-
-    public Nodo<T> peek() {
+   public T peek(){
+       return L.getInfo();
+   }
+    public Nodo<T> peekNodo() {
         return L;
     }
 

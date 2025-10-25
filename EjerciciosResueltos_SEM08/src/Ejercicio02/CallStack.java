@@ -23,7 +23,7 @@ public class CallStack {
         int n = pila.contar();
         String titulos[] = {"METODOS", "PARAMETROS", "TIEMPO ESTIMADO"};
         Object datos[][] = new Object[n][3];
-        Nodo<CallFrame> nodo = pila.peek();
+        Nodo<CallFrame> nodo = pila.peekNodo();
 
         for (int i = 0; i < n; i++) {
             CallFrame pila = nodo.getInfo();

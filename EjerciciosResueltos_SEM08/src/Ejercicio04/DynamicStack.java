@@ -7,7 +7,6 @@ package Ejercicio04;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-
 public class DynamicStack<T> {
 
     private final int tamanio = 10;
@@ -26,7 +25,7 @@ public class DynamicStack<T> {
     }
 
     public void redimensionar() {
-        JOptionPane.showMessageDialog(null, "El array se ha redimensionado","INFORMACION",1);
+        JOptionPane.showMessageDialog(null, "El array se ha redimensionado", "INFORMACION", 1);
         cantidadRedimensiones++;
         int nuevoTamanio = array.length * 2;
         T arrayNuevo[] = (T[]) new Object[nuevoTamanio];
@@ -43,19 +42,23 @@ public class DynamicStack<T> {
         tope++;
         array[tope] = valor;
     }
-    public void mostrar(DefaultListModel modelo){
+
+    public void mostrar(DefaultListModel modelo) {
         modelo.removeAllElements();
-        for(int i=tope ; i>=0 ; i--){
+        for (int i = tope; i >= 0; i--) {
             modelo.addElement(array[i]);
         }
     }
+
     public int getCantidadRedimensiones() {
         return cantidadRedimensiones;
     }
-    public int tamanioArray(){
+
+    public int tamanioArray() {
         int tamanio = 10;
-        for(int i=0;i<cantidadRedimensiones;i++)
+        for (int i = 0; i < cantidadRedimensiones; i++) {
             tamanio = tamanio * 2;
+        }
         return tamanio;
     }
 
