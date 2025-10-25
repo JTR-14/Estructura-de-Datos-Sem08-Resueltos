@@ -4,17 +4,20 @@
  */
 package Ejercicio04;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
  */
 public class FrmEjercicio04 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmEjercicio04
-     */
+    DynamicStack ds = new DynamicStack();
+    DefaultListModel lista = new DefaultListModel();
     public FrmEjercicio04() {
         initComponents();
+        lstDatos.setModel(lista);
     }
 
     /**
@@ -28,16 +31,17 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtExpresion = new javax.swing.JTextField();
-        cmbTipo = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstDatos = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        btnRedimensiones = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblNumero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,9 +54,6 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
                 txtExpresionActionPerformed(evt);
             }
         });
-
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--", "String", "Character", "Integer", "Double", "Boolean" }));
-        cmbTipo.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Dato:"));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -103,16 +104,22 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(lstDatos);
 
-        jButton1.setText("N° de Redimensiones");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRedimensiones.setText("N° de Redimensiones");
+        btnRedimensiones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRedimensionesActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Limite de Entradas: 10");
+        jLabel2.setText("Limite de Entradas: ");
 
-        jLabel3.setText("Redimensión : X2");
+        jLabel3.setText("Redimensión : ");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("X2");
+
+        lblNumero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNumero.setText("10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,43 +128,38 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(txtExpresion, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(178, 178, 178)
-                            .addComponent(jLabel1)
-                            .addGap(89, 89, 89))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(26, 26, 26)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2)))))))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRedimensiones)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(txtExpresion, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtExpresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(74, 74, 74)))
-                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addComponent(txtExpresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,11 +167,15 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblNumero))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(btnRedimensiones, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))))
         );
 
@@ -181,7 +187,15 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtExpresionActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        if(txtExpresion.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese una expresion","ADVERTENCIA",2);
+            return;
+        }
+        String expresion = txtExpresion.getText().trim();
+        ds.push(expresion);
+        ds.mostrar(lista);
+        txtExpresion.setText("");
+        txtExpresion.requestFocus();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -193,9 +207,9 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnRedimensionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedimensionesActionPerformed
+        JOptionPane.showMessageDialog(null, "N° de Redimensiones: "+ ds.getCantidadRedimensiones()+"\nTamanio del Array: "+ds.tamanioArray(), "MENSAJE",1);
+    }//GEN-LAST:event_btnRedimensionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,14 +219,15 @@ public class FrmEjercicio04 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRedimensiones;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbTipo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNumero;
     private javax.swing.JList<String> lstDatos;
     private javax.swing.JTextField txtExpresion;
     // End of variables declaration//GEN-END:variables
